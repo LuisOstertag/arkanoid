@@ -5,11 +5,11 @@ class Scene1 extends Phaser.Scene{
 
 preload() {
 
-    this.load.image('fondo' , './assets/fondo.png');
-    this.load.tilemapTiledJSON('map' , './assets/primero.json');
     this.load.atlas('bloques', './assets/atlas.png', './assets/atlas_atlas.json');
     this.load.image('ball' , './Assets/ball.png');
     this.load.image('padle' , './Assets/barra.png');
+    this.load.image("tiles", "assets/tiles1.png");
+    this.load.tilemapTiledJSON("World", "assets/tilemap2.json");
 
    
     
@@ -19,14 +19,10 @@ preload() {
 
 create(){
 
+    this.map = this.add.tilemap("World");
+      var tileset = this.map.addTilesetImage("tiles", "tiles");
+      this.backgroundLayer = this.map.createStaticLayer("1", tileset);
 
-    //fondo
-    map = this.make.tilemap({ key: 'map' });
-
-    var groundTiles = map.addTilesetImage('fondo');
-  
-    
-    var groundLayer  = map.createDynamicLayer('fondo', groundTiles, 0, 0);    
 
     this.physics.world.setBoundsCollision(true, true, true, false);
 
@@ -96,11 +92,11 @@ update (time, delta)
        // Donde esta la bola
      if (this.ball.y > 600)
      {
-        scoreV = scoreV - 1;
-        text.setText('Vidas: ' + scoreV);
-        if (scoreV >= 1)
+        vida1 = vida1 - 1;
+        text.setText('Vidas: ' + vida1);
+        if (vida1 >= 1)
          this.resetBall();
-         if (scoreV == 0) {
+         if (vida1 == 0) {
             this.resetLevel();
 
           
@@ -125,8 +121,8 @@ update (time, delta)
       }
       else {
         
-        score = score + 10;
-        texto.setText('Score: ' + score);
+        puntos = puntos + 50;
+        texto.setText('Puntos: ' + puntos);
       }
   }
 // Resetear bola
@@ -146,10 +142,10 @@ resetLevel ()
         brick.enableBody(false, 0, 0, true, true);
         });
         
-    score = 0;
-    scoreV = 3;
-    texto.setText('Score: ' + score);
-    text.setText('Vidas: ' + scoreV);
+    puntos = 0;
+    vida1 = 3;
+    texto.setText('Puntos: ' + puntos);
+    text.setText('Vidas: ' + vida1);
     this.scene.start('GameOver');
 
 }

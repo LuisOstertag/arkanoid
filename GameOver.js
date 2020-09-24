@@ -5,8 +5,6 @@ class GameOver extends Phaser.Scene{
 
 preload() {
 
-    this.load.image('fondo' , './assets/fondo.png');
-    this.load.tilemapTiledJSON('map' , './assets/primero.json');
     this.load.image("menu", "./assets/menu.png");
 
    
