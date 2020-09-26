@@ -5,12 +5,7 @@ class Scene2 extends Phaser.Scene{
 
 preload() {
     
-    this.load.atlas('bloques', './assets/atlas.png', './assets/atlas_atlas.json');
-    this.load.image('ball' , './Assets/ball.png');
-    this.load.image('padle' , './Assets/barra.png');
-
-    
-   
+    this.load.atlas('atlas', './assets/atlasfinal.png', './assets/atlasfinal_atlas.json');
     this.load.image("tiles", "assets/tiles1.png");
     this.load.tilemapTiledJSON("World", "assets/lvl2.json");
    
@@ -20,7 +15,7 @@ preload() {
 
 create(){
 
-    
+    //fondo
     this.map = this.add.tilemap("World");
       var tileset = this.map.addTilesetImage("tiles", "tiles");
       this.backgroundLayer = this.map.createStaticLayer("1", tileset);
@@ -33,14 +28,14 @@ create(){
      // Bloques
      this.bricks = this.physics.add.staticGroup({
         setScale: {x: 1, y: 1 },
-          key: 'bloques', frame: [ "1", "2", "3" ],
+          key: 'atlas', frame: [ "1", "2", "3" ],
           frameQuantity: 8,
           gridAlign: { width: 8, height: 8, cellWidth: 80, cellHeight: 50, x: 100, y: 100 }
         
       });
       this.bricks1 = this.physics.add.staticGroup({
         setScale: {x: 1, y: 1 },
-          key: 'bloques', frame: [ "4", "4",  "4", "4"  ],
+          key: 'atlas', frame: [ "4", "4",  "4", "4"  ],
           frameQuantity: 4,
           gridAlign: { width: 4, height: 4, cellWidth: 170, cellHeight: 50, x: 160, y: 250 }
         
@@ -50,10 +45,10 @@ create(){
          
 
          // Ball
-    this.ball = this.physics.add.image(400, 545,  'ball').setCollideWorldBounds(true).setBounce(1).setScale(2);
+    this.ball = this.physics.add.image(400, 545,  'atlas', "ball").setCollideWorldBounds(true).setBounce(1).setScale(2);
     this.ball.setData('onPaddle', true);
         //Barra
-    this.paddle = this.physics.add.image(400, 575, 'padle').setImmovable().setScale(4);
+    this.paddle = this.physics.add.image(400, 575, 'atlas', "barra").setImmovable().setScale(4);
         
 
          //  Colisiones
@@ -90,7 +85,7 @@ this.input.on('pointerup', function (pointer) {
 
     
 
-    let ClaseVidas = new Vidas({scene: this, x:320, y:600});
+    let ClaseVidas = new Vidas({scene: this, x:290, y:590});
     
     let ClasePuntaje = new Puntaje({scene: this, x:320, y:20});
 
@@ -103,7 +98,6 @@ update (time, delta)
      if (this.ball.y > 600)
      {
         vida1 = vida1 - 1;
-        text.setText('Vidas: ' + vida1);
         if (vida1 >= 1)
          this.resetBall();
          if (vida1 == 0) {
@@ -158,7 +152,6 @@ resetLevel ()
     puntos = 0;
     vida1 = 3;
     texto.setText('Puntos: ' + puntos);
-    text.setText('Vidas: ' + vida1);
     this.scene.start('GameOver');
 
 }

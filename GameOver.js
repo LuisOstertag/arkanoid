@@ -6,11 +6,6 @@ class GameOver extends Phaser.Scene{
 preload() {
 
     this.load.image("menu", "./assets/menu.png");
-
-   
-    
-   
-
 }
 
 create(){
@@ -23,7 +18,7 @@ var texto = this.add.text(240, 300, "Fin del Juego", { fontSize: '60px Arial', c
          this.scene.start('menu');
      } );
 
-    
+     
 
 
  

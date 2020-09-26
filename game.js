@@ -10,7 +10,7 @@ var config = {
             debug: false
         }
     },
-    scene: [Menu,Scene2,Scene1,GameOver]
+    scene: [Menu,Scene1,Scene2,GameOver]
 };
 var game = new Phaser.Game(config);
 
@@ -28,5 +28,6 @@ var bricks1;
 var score = 0;
 var puntos = 0;
 var vida1 = 3;
+var ball1
 
 
